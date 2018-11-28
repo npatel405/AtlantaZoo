@@ -25,9 +25,9 @@ public class AddAnimal extends JFrame{
 
         try{
             Connection connection = DriverManager.getConnection(
-                    "jdbc:myDriver:DatabaseName",
-                    "123",
-                    "456");
+                    "https://academic-mysql.cc.gatech.edu/phpmyadmin",
+                    "cs4400_group18",
+                    "R7mNv3pS");
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery("SELECT DISTINCT Name FROM Exhibit");
             rs.last();

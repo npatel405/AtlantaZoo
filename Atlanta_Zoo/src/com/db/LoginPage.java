@@ -40,9 +40,9 @@ public class LoginPage extends JFrame{
 
                 try {
                     Connection con = DriverManager.getConnection(
-                            "jdbc:myDriver:DatabaseName",
-                            "123",
-                            "456");
+                            "https://academic-mysql.cc.gatech.edu/phpmyadmin",
+                            "cs4400_group18",
+                            "R7mNv3pS");
 
                     Statement stmt = con.createStatement();
                     ResultSet rs = stmt.executeQuery("SELECT Password, Role FROM User WHERE Email = " + em);
