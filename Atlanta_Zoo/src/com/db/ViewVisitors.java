@@ -1,6 +1,7 @@
 package com.db;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -10,10 +11,20 @@ public class ViewVisitors extends JFrame {
 
     private JPanel viewVisitorsPanel;
     private JButton goBackButton;
+    private JTable resultTable;
+    private JButton deleteVisitorButton;
+
+    private String[] col_name = {"Username", "Email"};
 
     public ViewVisitors() {
 
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+
+        String[][] data = {{"username","email"}}; // row data
+        DefaultTableModel df = new DefaultTableModel(data, col_name);
+        resultTable.setModel(df);
+        resultTable.setCellSelectionEnabled(true);
+
 
         add(viewVisitorsPanel);
         setTitle("Atlanta Zoo: Administrator View Visitors");

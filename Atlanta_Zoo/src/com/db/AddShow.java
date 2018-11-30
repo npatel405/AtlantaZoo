@@ -13,12 +13,26 @@ public class AddShow extends JFrame {
     private JButton addShowButton;
     private JComboBox Exhibit;
     private JPanel AddShowPanel;
+    private JButton goBackButton;
 
     public AddShow(){
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         add(AddShowPanel);
         setSize(500, 500);
         setTitle("Atlanta Zoo: Add Show");
+
+        // goBack button
+        goBackButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                AdministratorFunctionality af = new AdministratorFunctionality();
+                af.setVisible(true);
+
+                setVisible(false);  //hide and close current window
+                dispose();
+            }
+        }); // end button action
 
         try{
             Connection connection = DriverManager.getConnection(
