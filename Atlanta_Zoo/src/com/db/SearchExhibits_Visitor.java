@@ -22,6 +22,7 @@ public class SearchExhibits_Visitor extends JFrame {
     private JButton searchButton;
     private JPanel searchexhibitsvPanel;
     private JTable result;          //show the search result
+    private JButton goBackButton;
     private String[] col_name = {"Name", "Size", "NumAnimals", "Water"};
 
     public SearchExhibits_Visitor(){
@@ -30,8 +31,8 @@ public class SearchExhibits_Visitor extends JFrame {
         DefaultTableModel df = new DefaultTableModel(data, col_name);
         result.setModel(df);
         result.setCellSelectionEnabled(true);
-        searchexhibitsvPanel.setBackground(Color.ORANGE);
-        setTitle("Atlanta Zoo");
+        //searchexhibitsvPanel.setBackground(Color.ORANGE);
+        setTitle("Atlanta Zoo: Visitor Exhibit Search");
         setSize(500,500);
         add(searchexhibitsvPanel);
         pack();
@@ -46,6 +47,19 @@ public class SearchExhibits_Visitor extends JFrame {
                 //goes to Exhibits detail page
             }
         });
+
+        // go back button
+        goBackButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                VisitorFunctionality vf = new VisitorFunctionality();
+                vf.setVisible(true);
+
+                setVisible(false);  //hide and close current window
+                dispose();
+            }
+        }); // end go back button action
 
         searchButton.addActionListener(new ActionListener() {
             @Override
