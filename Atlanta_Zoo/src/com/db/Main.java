@@ -41,12 +41,12 @@ public class Main {
             af.setVisible(true);
 
             // Staff
-            //StaffFunctionality sf = new StaffFunctionality();
-            //sf.setVisible(true);
+            StaffFunctionality sf = new StaffFunctionality();
+            sf.setVisible(true);
 
             // Visitor
-            //VisitorFunctionality vf = new VisitorFunctionality();
-            //vf.setVisible(true);
+            VisitorFunctionality vf = new VisitorFunctionality();
+            vf.setVisible(true);
 
 
 

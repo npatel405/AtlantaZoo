@@ -19,6 +19,7 @@ public class SearchAnimals extends JFrame {
     private JComboBox ageMin;
     private JComboBox ageMax;
     private JTable resultTable;
+    private JButton selectAnimalButton;
 
     private String[] col_name = {"Name", "Species", "Exhibit", "Age", "Type"};
 
@@ -47,6 +48,21 @@ public class SearchAnimals extends JFrame {
                 //vs.setVisible(true);
                 StaffFunctionality sf = new StaffFunctionality();
                 sf.setVisible(true);
+
+                setVisible(false);  //hide and close current window
+
+                dispose();
+            }
+        }); // end go back button action
+
+
+        // select animal button
+        selectAnimalButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                LogNote ln = new LogNote();
+                ln.setVisible(true);
 
                 setVisible(false);  //hide and close current window
 

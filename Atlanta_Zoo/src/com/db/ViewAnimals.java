@@ -9,6 +9,15 @@ import java.awt.event.ActionListener;
 public class ViewAnimals extends JFrame {
     private JPanel viewAnimalsPanel;
     private JButton goBackButton;
+    private JComboBox exhibitDropDown;
+    private JButton searchButton;
+    private JTextField nameTextField;
+    private JTextField speciesTextField;
+    private JComboBox animalTypeDropDown;
+    private JComboBox ageMinDropDown;
+    private JComboBox ageMaxDropDown;
+    private JTable resultTable;
+    private JButton removeAnimalButton;
 
 
     public ViewAnimals() {
