@@ -32,6 +32,25 @@ public class Main {
 //                if (con != null)
 //                    con.close();
 //            } catch (SQLException e) {}
+
+
+            // Three user types:
+
+            // Administrator
+            //AdministratorFunctionality af = new AdministratorFunctionality();
+            //af.setVisible(true);
+
+            // Staff
+            StaffFunctionality sf = new StaffFunctionality();
+            sf.setVisible(true);
+
+            // Visitor
+            //VisitorFunctionality vf = new VisitorFunctionality();
+            //vf.setVisible(true);
+
+
+
+
         }
     }
 }

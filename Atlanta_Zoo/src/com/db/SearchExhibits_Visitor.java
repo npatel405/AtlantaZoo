@@ -25,6 +25,7 @@ public class SearchExhibits_Visitor extends JFrame {
     private String[] col_name = {"Name", "Size", "NumAnimals", "Water"};
 
     public SearchExhibits_Visitor(){
+        this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         String[][] data = {{"1","2","3","4"}}; //this is the row
         DefaultTableModel df = new DefaultTableModel(data, col_name);
         result.setModel(df);
