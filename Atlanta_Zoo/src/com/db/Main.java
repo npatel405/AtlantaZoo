@@ -14,11 +14,11 @@ public class Main {
         String PASS = "R7mNv3pS";
         JLabel msg = new JLabel();
         JFrame frame = new JFrame();
-        Connection con = null;
+        //Connection con = null;
         try {
           //  Class.forName(DRIVER).newInstance();
-            con = DriverManager.getConnection(URL, USER, PASS);
-            System.out.println(con.toString());
+            Globals.con = DriverManager.getConnection(URL, USER, PASS);
+            System.out.println(Globals.con.toString());
 //            if (!con.isClosed()) {
 //                System.out.println("Successfully connected to " +
 //                        "MySQL server using TCP/IP...");
@@ -33,20 +33,24 @@ public class Main {
 //                    con.close();
 //            } catch (SQLException e) {}
 
+            // login page
+            LoginPage lp = new LoginPage();
+            lp.setVisible(true);
+
 
             // Three user types:
 
             // Administrator
-            AdministratorFunctionality af = new AdministratorFunctionality();
-            af.setVisible(true);
+            //AdministratorFunctionality af = new AdministratorFunctionality();
+            //af.setVisible(true);
 
             // Staff
-            StaffFunctionality sf = new StaffFunctionality();
-            sf.setVisible(true);
+            //StaffFunctionality sf = new StaffFunctionality();
+            //sf.setVisible(true);
 
             // Visitor
-            VisitorFunctionality vf = new VisitorFunctionality();
-            vf.setVisible(true);
+            //VisitorFunctionality vf = new VisitorFunctionality();
+            //vf.setVisible(true);
 
 
 

@@ -39,12 +39,12 @@ public class LoginPage extends JFrame{
                 char[] pw = Password.getPassword();
 
                 try {
-                    Connection con = DriverManager.getConnection(
-                            "https://academic-mysql.cc.gatech.edu/phpmyadmin",
-                            "cs4400_group18",
-                            "R7mNv3pS");
+//                    Connection con = DriverManager.getConnection(
+//                            "https://academic-mysql.cc.gatech.edu/phpmyadmin",
+//                            "cs4400_group18",
+//                            "R7mNv3pS");
 
-                    Statement stmt = con.createStatement();
+                    Statement stmt = Globals.con.createStatement();
                     ResultSet rs = stmt.executeQuery("SELECT Password, Role FROM User WHERE Email = " + em);
                     //no em in the database
                     if(rs.next()) {

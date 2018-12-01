@@ -37,17 +37,18 @@ public class Registration extends JFrame{
                 //first check if the password confirmation equals to password
                 if (Arrays.equals(ps,ps_confirm)) {
                     try {
-                        Connection con = DriverManager.getConnection(
-                                "jdbc:myDriver:DatabaseName",
-                                "123",
-                                "456");
-                        Statement stmt = con.createStatement();
+//                        Connection con = DriverManager.getConnection(
+//                                "jdbc:myDriver:DatabaseName",
+//                                "123",
+//                                "456");
+
+                        Statement stmt = Globals.con.createStatement();
 
                         //check if Email and Username haven't been used
                         int m = stmt.executeUpdate("INSERT INTO User VALUES('"+usrn+"','"+em+"','Visitor','"+ps.toString()+"')");
                         if(m == 1){
                             //go back to Login Page
-                            con.close();
+                            Globals.con.close();
                             LoginPage loginPage = new LoginPage();
                             loginPage.setVisible(true);
                             setVisible(false);
@@ -78,17 +79,18 @@ public class Registration extends JFrame{
                 //first check if the password confirmation equals to password
                 if (Arrays.equals(ps,ps_confirm)) {
                     try {
-                        Connection con = DriverManager.getConnection(
-                                "jdbc:myDriver:DatabaseName",
-                                "123",
-                                "456");
-                        Statement stmt = con.createStatement();
+//                        Connection con = DriverManager.getConnection(
+//                                "jdbc:myDriver:DatabaseName",
+//                                "123",
+//                                "456");
+
+                        Statement stmt = Globals.con.createStatement();
 
                         //check if Email and Username haven't been used
                         int m = stmt.executeUpdate("INSERT INTO User VALUES('"+usrn+"','"+em+"','Staff','"+ps.toString()+"')");
                         if(m == 1){
                             //go back to Login Page
-                            con.close();
+                            Globals.con.close();
                             LoginPage loginPage = new LoginPage();
                             loginPage.setVisible(true);
                             setVisible(false);
