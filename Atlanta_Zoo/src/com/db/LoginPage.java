@@ -44,17 +44,28 @@ public class LoginPage extends JFrame{
 //                            "cs4400_group18",
 //                            "R7mNv3pS");
 
-                    Statement stmt = Globals.con.createStatement();
-                    ResultSet rs = stmt.executeQuery("SELECT Password, Role FROM User WHERE Email = " + em);
+                    //Statement stmt = Globals.con.createStatement();
+                    //stmt.executeUpdate("USE cs4400_group18;");
+
+                    //ResultSet rs = stmt.executeQuery("SELECT Password, UserType FROM User WHERE Email = " + em);
+
+
+                    //String strPassword = String.copyValueOf(pw);
+
+                    System.out.println();
+
+                    PreparedStatement stmt = Globals.con.prepareStatement("SELECT Password, UserType FROM User WHERE Email = \'" + em + "\'");
+                    ResultSet rs = stmt.executeQuery();
+
                     //no em in the database
-                    if(rs.next()) {
+                    if(!rs.next()) {
                         JOptionPane.showMessageDialog(loginPanel,
                                 "Wrong Email!");
                     }else{
                         String pw_check = rs.getString("Password");
                         if(Arrays.equals(pw,pw_check.toCharArray())){
                             //password and email combination is correct, go to certain page
-                            String role = rs.getString("Role");
+                            String role = rs.getString("UserType");
                             //goes to next page, use con.close() to close the connection to db before proceed to next page
                             if(role.equals("Admin")){
                                 //goes to Admin Page

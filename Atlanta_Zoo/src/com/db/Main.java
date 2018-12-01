@@ -5,6 +5,7 @@ import java.awt.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 public class Main {
     public static void main(String args[]) {
@@ -18,6 +19,8 @@ public class Main {
         try {
           //  Class.forName(DRIVER).newInstance();
             Globals.con = DriverManager.getConnection(URL, USER, PASS);
+            Statement stmt = Globals.con.createStatement();
+            stmt.executeUpdate("USE cs4400_group18;");
             System.out.println(Globals.con.toString());
 //            if (!con.isClosed()) {
 //                System.out.println("Successfully connected to " +

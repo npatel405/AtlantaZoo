@@ -44,8 +44,17 @@ public class Registration extends JFrame{
 
                         Statement stmt = Globals.con.createStatement();
 
+                        String strPassword = String.copyValueOf(ps);
+
+                        //System.out.println(strPassword);
+
+                        // username, password, email, usertype
+
                         //check if Email and Username haven't been used
-                        int m = stmt.executeUpdate("INSERT INTO User VALUES('"+usrn+"','"+em+"','Visitor','"+ps.toString()+"')");
+                        //stmt.executeUpdate("USE cs4400_group18;");
+                        //int m = stmt.executeUpdate("INSERT INTO User VALUES(\'"+usrn+"\',\'"+em+"',\'Visitor\',\'"+ps.toString()+"\')");
+                        // ps.toString()
+                        int m = stmt.executeUpdate("INSERT INTO User VALUES('"+usrn+"','"+strPassword+"','" + em + "','Visitor')");
                         if(m == 1){
                             //go back to Login Page
                             Globals.con.close();
@@ -86,8 +95,10 @@ public class Registration extends JFrame{
 
                         Statement stmt = Globals.con.createStatement();
 
+                        String strPassword = String.copyValueOf(ps);
+
                         //check if Email and Username haven't been used
-                        int m = stmt.executeUpdate("INSERT INTO User VALUES('"+usrn+"','"+em+"','Staff','"+ps.toString()+"')");
+                        int m = stmt.executeUpdate("INSERT INTO User VALUES('"+usrn+"','"+strPassword+"','" + em + "','Staff')");
                         if(m == 1){
                             //go back to Login Page
                             Globals.con.close();
