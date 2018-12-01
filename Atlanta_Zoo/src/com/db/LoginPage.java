@@ -77,6 +77,12 @@ public class LoginPage extends JFrame{
                                 dispose();
                             }else{
                                 //goes to Staff Page
+
+                                StaffFunctionality sf = new StaffFunctionality();
+                                sf.setVisible(true);
+                                setVisible(false);
+                                dispose();
+
                             }
                         }else{
                             JOptionPane.showMessageDialog(loginPanel,
