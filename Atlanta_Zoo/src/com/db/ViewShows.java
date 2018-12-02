@@ -4,14 +4,12 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import javax.swing.table.DefaultTableModel;
 
 // accessible from staff functionality page
 public class ViewShows extends JFrame {
-
-
-
-
 
     private JPanel viewShowsPanel;
     private JButton goBackButton;
@@ -21,17 +19,74 @@ public class ViewShows extends JFrame {
 
     private String[] col_name = {"Name", "Time", "Exhibit"};
 
+    private String[][] populateTable(){
+        //String[][] tableData = {{"Show_Name","Show_Time","Exhibit_Name"}};
+        String [][] tableData;
+        String[][] noShowData = {{"None","None","None"}};
+
+        try {
+
+            PreparedStatement stmt = Globals.con.prepareStatement(
+                    "SELECT Shows.Name, Shows.DateAndTime, Shows.Exhibit FROM Shows " +
+                            " WHERE Shows.Host = \'" + Globals.activeUser + "\'");
+            ResultSet rs = stmt.executeQuery();
+
+            stmt = Globals.con.prepareStatement(
+                    "SELECT Shows.Name, Shows.DateAndTime, Shows.Exhibit   " + " FROM Shows " +
+                            " WHERE Shows.Host = \'" + Globals.activeUser + "\'");
+
+            ResultSet rowNum = stmt.executeQuery();
+            int rows = 0;
+            while(rowNum.next()) {
+                //System.out.println(rowNum.getString(1));
+                rows++;
+            }
+            //System.out.println(i);
+
+            if (!rs.next()) {
+                //System.out.println("NO SHOWS");
+
+                return noShowData;
+
+            } else {
+                // [row][col]
+                tableData = new String[rows][col_name.length];
+
+                // cycle rows
+                int i;
+                for (i = 0; i < rows; i++){
+
+                    // cycle columns
+                    for (int j = 1; j <= col_name.length; j++) {
+                        tableData[i][j-1] = rs.getString(j);
+                    } // end columns loop
+                    rs.next();
+                } // end rows loop
+
+                return tableData;
+
+            }
+
+
+        } catch(Exception ex) {System.err.println(ex);}
+
+
+        //tableData = {{"None","None","None"}};
+        //return tableData;
+        return noShowData;
+    } // end populateTable()
+
 
     public ViewShows() {
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
         //viewShowsPanel.setBackground(Color.lightGray);
 
-        String[][] data = {{"Show_Name","Show_Time","Exhibit_Name"}}; //this is the row
+        String[][] data = populateTable();//{{"Show_Name","Show_Time","Exhibit_Name"}}; //this is the row
 
         DefaultTableModel df = new DefaultTableModel(data, col_name);
         showsTable.setModel(df);
-        showsTable.setCellSelectionEnabled(true); // should probably change to false
+        showsTable.setCellSelectionEnabled(true);
         pack();
 
         add(viewShowsPanel);
@@ -44,8 +99,7 @@ public class ViewShows extends JFrame {
         goBackButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //ViewShows vs = new ViewShows();
-                //vs.setVisible(true);
+
                 StaffFunctionality sf = new StaffFunctionality();
                 sf.setVisible(true);
 

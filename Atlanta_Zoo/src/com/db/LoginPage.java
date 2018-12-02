@@ -57,19 +57,34 @@ public class LoginPage extends JFrame{
                     PreparedStatement stmt = Globals.con.prepareStatement("SELECT Password, UserType FROM User WHERE Email = \'" + em + "\'");
                     ResultSet rs = stmt.executeQuery();
 
+
+
                     //no em in the database
                     if(!rs.next()) {
                         JOptionPane.showMessageDialog(loginPanel,
                                 "Wrong Email!");
                     }else{
+
+                        // get Username for current user
+                        stmt = Globals.con.prepareStatement("SELECT Username FROM User WHERE Email = \'" + em + "\'");
+                        ResultSet activeUsername = stmt.executeQuery();
+                        activeUsername.next();
+                        Globals.activeUser = activeUsername.getString(1);
+                        //System.out.println(Globals.activeUser);
+
+
                         String pw_check = rs.getString("Password");
                         if(Arrays.equals(pw,pw_check.toCharArray())){
                             //password and email combination is correct, go to certain page
                             String role = rs.getString("UserType");
                             //goes to next page, use con.close() to close the connection to db before proceed to next page
-                            if(role.equals("Admin")){
+                            if(role.equals("admin")){
                                 //goes to Admin Page
-                            }else if(role.equals("Visitor")){
+                                AdministratorFunctionality af = new AdministratorFunctionality();
+                                af.setVisible(true);
+                                setVisible(false);
+                                dispose();
+                            }else if(role.equals("visitor")){
                                 //goes to Visitor Page
                                 VisitorFunctionality vf = new VisitorFunctionality();
                                 vf.setVisible(true);

@@ -54,10 +54,10 @@ public class Registration extends JFrame{
                         //stmt.executeUpdate("USE cs4400_group18;");
                         //int m = stmt.executeUpdate("INSERT INTO User VALUES(\'"+usrn+"\',\'"+em+"',\'Visitor\',\'"+ps.toString()+"\')");
                         // ps.toString()
-                        int m = stmt.executeUpdate("INSERT INTO User VALUES('"+usrn+"','"+strPassword+"','" + em + "','Visitor')");
+                        int m = stmt.executeUpdate("INSERT INTO User VALUES('"+usrn+"','"+strPassword+"','" + em + "','visitor')");
                         if(m == 1){
                             //go back to Login Page
-                            Globals.con.close();
+                            //Globals.con.close();
                             LoginPage loginPage = new LoginPage();
                             loginPage.setVisible(true);
                             setVisible(false);
@@ -98,10 +98,10 @@ public class Registration extends JFrame{
                         String strPassword = String.copyValueOf(ps);
 
                         //check if Email and Username haven't been used
-                        int m = stmt.executeUpdate("INSERT INTO User VALUES('"+usrn+"','"+strPassword+"','" + em + "','Staff')");
+                        int m = stmt.executeUpdate("INSERT INTO User VALUES('"+usrn+"','"+strPassword+"','" + em + "','staff')");
                         if(m == 1){
                             //go back to Login Page
-                            Globals.con.close();
+                            //Globals.con.close();
                             LoginPage loginPage = new LoginPage();
                             loginPage.setVisible(true);
                             setVisible(false);
