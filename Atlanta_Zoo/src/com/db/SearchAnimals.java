@@ -357,7 +357,9 @@ public class SearchAnimals extends JFrame {
         String[][] data = getAllAnimals();//populateTable();//{{"name","species","exhibit","age", "type"}}; // row data
         DefaultTableModel df = new DefaultTableModel(data, col_name);
         resultTable.setModel(df);
-        resultTable.setCellSelectionEnabled(true);
+        //resultTable.setCellSelectionEnabled(true);
+        resultTable.setColumnSelectionAllowed(false);
+        resultTable.setRowSelectionAllowed(true);
 
         add(searchAnimalsPanel);
         pack();
@@ -499,6 +501,35 @@ public class SearchAnimals extends JFrame {
         selectAnimalButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+
+                int selectedRow = resultTable.getSelectedRow();
+
+//                String staffAnimalName;
+//                String staffAnimalSpecies;
+//                String staffAnimalAge;
+//                String staffAnimalType;
+//                String staffAnimalExhibit;
+
+
+
+
+
+
+                Globals.staffAnimalName = resultTable.getModel().getValueAt(selectedRow, 0).toString();
+                Globals.staffAnimalSpecies = resultTable.getModel().getValueAt(selectedRow, 1).toString();
+                Globals.staffAnimalExhibit = resultTable.getModel().getValueAt(selectedRow, 2).toString();
+                Globals.staffAnimalAge = resultTable.getModel().getValueAt(selectedRow, 3).toString();
+                Globals.staffAnimalType = resultTable.getModel().getValueAt(selectedRow, 4).toString();
+
+                System.out.println("\n\nSelect Animal Button pressed...");
+                System.out.println(Globals.staffAnimalName);
+                System.out.println(Globals.staffAnimalSpecies);
+                System.out.println(Globals.staffAnimalExhibit);
+                System.out.println(Globals.staffAnimalAge);
+                System.out.println(Globals.staffAnimalType);
+
+                //System.out.println(Globals.staffAnimalExhibit);
+
 
                 LogNote ln = new LogNote();
                 ln.setVisible(true);

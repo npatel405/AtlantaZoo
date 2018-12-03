@@ -14,12 +14,144 @@ public class AddShow extends JFrame {
     private JComboBox Exhibit;
     private JPanel AddShowPanel;
     private JButton goBackButton;
+    private JComboBox exhibitNameComboBox;
+
+    private String[] getExhibitNames() {
+        String[] nameList;
+        String[] noNames = {"None"};
+
+        // List<String> list = new ArrayList<String>();
+
+
+        try {
+
+            PreparedStatement stmt = Globals.con.prepareStatement(
+                    " SELECT DISTINCT Exhibit.Name FROM Exhibit");
+
+            ResultSet rs = stmt.executeQuery();
+
+
+            stmt = Globals.con.prepareStatement(
+                    " SELECT DISTINCT Exhibit.Name FROM Exhibit");
+
+            ResultSet rowNum = stmt.executeQuery();
+            int rows = 0;
+            while(rowNum.next()) {
+                //System.out.println(rowNum.getString(1));
+                rows++;
+            } // end while
+            //System.out.println(i);
+
+            if (!rs.next()) {
+                //System.out.println("NO SHOWS");
+
+                return noNames;
+
+            } else {
+
+
+                nameList = new String[rows];
+
+                int i;
+                for (i = 0; i < rows; i++) {
+
+                    nameList[i] = rs.getString(1);
+                    rs.next();
+
+                } // end for loop
+
+//                // loop to print names
+//                for (i=0; i < nameList.length; i++) {
+//                    System.out.println(nameList[i]);
+//                }
+
+                return nameList;
+            } // end else
+
+
+
+
+        } catch(Exception ex) {System.err.println(ex);}
+
+        return noNames;
+    }
+
+
+    private String[] getStaffNames() {
+        String[] nameList;
+        String[] noNames = {"None"};
+
+        // List<String> list = new ArrayList<String>();
+
+
+        try {
+
+            PreparedStatement stmt = Globals.con.prepareStatement(
+                    " SELECT DISTINCT User.Username FROM User WHERE User.UserType = \'staff\' ");
+
+            ResultSet rs = stmt.executeQuery();
+
+
+            stmt = Globals.con.prepareStatement(
+                    " SELECT DISTINCT User.Username FROM User WHERE User.UserType = \'staff\' ");
+
+            ResultSet rowNum = stmt.executeQuery();
+            int rows = 0;
+            while(rowNum.next()) {
+                //System.out.println(rowNum.getString(1));
+                rows++;
+            } // end while
+            //System.out.println(i);
+
+            if (!rs.next()) {
+                //System.out.println("NO SHOWS");
+
+                return noNames;
+
+            } else {
+
+
+                nameList = new String[rows];
+
+                int i;
+                for (i = 0; i < rows; i++) {
+
+                    nameList[i] = rs.getString(1);
+                    rs.next();
+
+                } // end for loop
+
+//                // loop to print names
+//                for (i=0; i < nameList.length; i++) {
+//                    System.out.println(nameList[i]);
+//                }
+
+                return nameList;
+            } // end else
+
+
+
+
+        } catch(Exception ex) {System.err.println(ex);}
+
+        return noNames;
+    }
 
     public AddShow(){
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         add(AddShowPanel);
         setSize(500, 500);
-        setTitle("Atlanta Zoo: Add Show");
+        setTitle("Atlanta Zoo: Administrator Add Show");
+
+        String[] exhibitNames = getExhibitNames();
+        //System.out.println(exhibitNames);
+        DefaultComboBoxModel exhibitOptions = new DefaultComboBoxModel(exhibitNames);
+        exhibitNameComboBox.setModel(exhibitOptions);
+
+        String[] staffNames = getStaffNames();
+        //System.out.println(exhibitNames);
+        DefaultComboBoxModel staffOptions = new DefaultComboBoxModel(staffNames);
+        Staff.setModel(staffOptions);
 
         // goBack button
         goBackButton.addActionListener(new ActionListener() {
@@ -35,11 +167,11 @@ public class AddShow extends JFrame {
         }); // end button action
 
         try{
-            Connection connection = DriverManager.getConnection(
-                    "jdbc:myDriver:DatabaseName",
-                    "123",
-                    "456");
-            Statement statement = connection.createStatement();
+//            Connection connection = DriverManager.getConnection(
+//                    "jdbc:myDriver:DatabaseName",
+//                    "123",
+//                    "456");
+            Statement statement = Globals.con.createStatement();
             ResultSet rs = statement.executeQuery("SELECT DISTINCT Name FROM Exhibit");
             rs.last();
             int rowCount = rs.getRow();
@@ -75,14 +207,27 @@ public class AddShow extends JFrame {
                 String date = Date.getText();
                 String time = Time.getText();
                 try{
-                    Connection connection = DriverManager.getConnection(
-                            "jdbc:myDriver:DatabaseName",
-                            "123",
-                            "456");
-                    Statement statement = connection.createStatement();
-                    int res = statement.executeUpdate("INSERT INTO User VALUES('"+showName + "','"+ exhibit + "','" + staff + "','" + date + time + "')");
+//                    Connection connection = DriverManager.getConnection(
+//                            "jdbc:myDriver:DatabaseName",
+//                            "123",
+//                            "456");
+                    Statement statement = Globals.con.createStatement();
+
+                    // Name, DateAndTime, Host, Exhibit
+                    int res = statement.executeUpdate("INSERT INTO Shows VALUES(\'"+showName + "\', \'"+ date +" "+ time + "\',\'" + Staff.getSelectedItem()
+                            + "\',\'" + exhibitNameComboBox.getSelectedItem() + "')");
+
+
+
+
+
                     if(res == 1) {
                         // Go back to Admin Functionality
+                        AdministratorFunctionality af = new AdministratorFunctionality();
+                        af.setVisible(true);
+                        setVisible(false);  //hide and close current window
+
+                        dispose();
                     }
                     else{
                         JOptionPane.showMessageDialog(AddShowPanel, "Failed to add show. Please make sure the show's name, date and time are correct");

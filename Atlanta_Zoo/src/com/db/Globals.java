@@ -9,6 +9,15 @@ public class Globals {
     static String activeUser;
 
 
+    static String staffAnimalName;
+    static String staffAnimalSpecies;
+    static String staffAnimalAge;
+    static String staffAnimalType;
+    static String staffAnimalExhibit;
+
+
+
+
 
 
 } // end class
